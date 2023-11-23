@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import NavBar from "../partials/header";
 
 function ProfileForm() {
   const {
@@ -11,7 +11,7 @@ function ProfileForm() {
     setValue,
   } = useForm();
 
-  const { userId } = useParams();
+  const userId = localStorage.getItem("userId");
   const [userDetails, setUserDetails] = useState({
     username: "",
     email: "",
@@ -19,6 +19,7 @@ function ProfileForm() {
   });
 
   useEffect(() => {
+    console.log(userId);
     axios
     .get(`https://comp305groupproject.onrender.com/api/users/${userId}`)
     .then((response) => {
@@ -58,6 +59,8 @@ function ProfileForm() {
   };
 
   return (
+    <div>
+      <NavBar />
     <form onSubmit={handleSubmit(onSubmit)} className="container mt-4">
       <h1 className="mb-3">Profile</h1>
 
@@ -120,6 +123,7 @@ function ProfileForm() {
         Update
       </button>
     </form>
+    </div>
   );
 }
 

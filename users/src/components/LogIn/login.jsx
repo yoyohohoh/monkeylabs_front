@@ -25,8 +25,12 @@ function LoginForm() {
         // Assuming the response data contains the user ID
         const userId = response.data._id;
 
+        // save userToken to local storage
+        localStorage.setItem("userToken", response.data.token);
+        localStorage.setItem("userId", userId);
+        
         // Redirect to the profile page with the user ID as a parameter
-        navigate(`/events`);
+        navigate(`/`);
       } else {
         // Handle the case where the user was not found
         alert("User not found. Please check the username.");

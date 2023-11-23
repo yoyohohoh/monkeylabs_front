@@ -27,8 +27,8 @@ function EventForm() {
                 <h1 className="mb-3 mt-5">Events</h1>
                 <div className="row">
                     {events.map(event => (
-                        <div key={event.id} className="col-md-4 mb-3">
-                            <Link to={`/event-details/${event.id}`} className="text-decoration-none">
+                        <div key={event._id} className="col-md-4 mb-3">
+                            <Link to={`/event-details/${event._id}`} className="text-decoration-none">
                                 <div className="card h-100 card-hover">
                                     <div className="card-body">
                                         <h5 className="card-title">{event.event_name}</h5>

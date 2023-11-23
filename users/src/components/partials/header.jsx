@@ -7,9 +7,11 @@ function Navbar() {
 
   const handleLogout = () => {
     // Your logout logic here
-    localStorage.removeItem('userToken'); // For example, if using localStorage
+    localStorage.removeItem('userToken');
+    localStorage.removeItem("userId");
     console.log('Logged out');
     // Redirect to login or home page after logout
+    window.location.href = '/';
   };
 
   return (

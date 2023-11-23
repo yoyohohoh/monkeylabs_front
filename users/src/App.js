@@ -28,8 +28,10 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         {/* <Route path="/events" element={<Events />} /> */}
-        <Route path="/eventdetails" element={<EventDetails />} />
-        <Route path="/profile/:userId" element={<Profile />} />
+        {/* <Route path="/event-details" element={<EventDetails />} /> */}
+        <Route path="/event-details/:eventId" element={<EventDetails />} />
+        {/* <Route path="/profile/:userId" element={<Profile />} /> */}
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

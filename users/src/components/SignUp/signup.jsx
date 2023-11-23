@@ -37,9 +37,12 @@ function LoginForm() {
 
       // Assuming the response data contains the user ID
       const userId = responseAdded.data._id;
+      
+      localStorage.setItem("userToken", response.data.token);
+      localStorage.setItem("userId", userId);
 
       // Redirect to the profile page with the user ID as a parameter
-      navigate(`/profile/${userId}`);
+      navigate(`/`);
     } catch (error) {
       console.error("Error creating user:", error);
       alert("Error creating user. Please try again later.");
