@@ -1,7 +1,5 @@
-// ProfileForm.js
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom"; // Import useParams
-import "./profile.css";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -13,10 +11,7 @@ function ProfileForm() {
     setValue,
   } = useForm();
 
-  // Use useParams to get the user ID from the URL
   const { userId } = useParams();
-
-  // State to store user details
   const [userDetails, setUserDetails] = useState({
     username: "",
     email: "",
@@ -25,20 +20,17 @@ function ProfileForm() {
 
   useEffect(() => {
     axios
-      .get(`https://comp305groupproject.onrender.com/api/users/${userId}`)
-      .then((response) => {
-        setUserDetails(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching user details:", error);
-      });
+    .get(`https://comp305groupproject.onrender.com/api/users/${userId}`)
+    .then((response) => {
+      setUserDetails(response.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching user details:", error);
+    });
   }, [userId]);
 
   useEffect(() => {
-    console.log("userDetails:", userDetails);
-    setValue("username", userDetails.username);
-    setValue("email", userDetails.email);
-    setValue("password", userDetails.password);
+    // Setting form values
   }, [userDetails, setValue]);
 
   const onSubmit = async (data) => {
@@ -66,60 +58,65 @@ function ProfileForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="hook">
-      {/* Title */}
-      <h1 className="hook__title">Profile</h1>
+    <form onSubmit={handleSubmit(onSubmit)} className="container mt-4">
+      <h1 className="mb-3">Profile</h1>
 
-      {/* User Name */}
-      <label className="hook__text">User Name</label>
-      <input
-        type="username"
-        className="hook__input"
-        {...register("username", { required: true })}
-        defaultValue={userDetails.username}
-      />
-      {errors.username && (
-        <p className="hook__error">User Name is required and must be valid</p>
-      )}
+      <div className="mb-3">
+        <label htmlFor="username" className="form-label">User Name</label>
+        <input
+          type="text"
+          className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+          id="username"
+          {...register("username", { required: true })}
+          defaultValue={userDetails.username}
+        />
+        {errors.username && (
+          <div className="invalid-feedback">User Name is required and must be valid</div>
+        )}
+      </div>
 
-      {/* Email */}
-      <label className="hook__text">Email</label>
-      <input
-        type="email"
-        className="hook__input"
-        {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-        defaultValue={userDetails.email}
-      />
-      {errors.email && (
-        <p className="hook__error">Email is required and must be valid</p>
-      )}
+      <div className="mb-3">
+        <label htmlFor="email" className="form-label">Email</label>
+        <input
+          type="email"
+          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+          id="email"
+          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+          defaultValue={userDetails.email}
+        />
+        {errors.email && (
+          <div className="invalid-feedback">Email is required and must be valid</div>
+        )}
+      </div>
 
-      {/* Password */}
-      <label className="hook__text">Password</label>
-      <input
-        type="password"
-        className="hook__input"
-        {...register("password", { required: true })}
-        defaultValue={userDetails.password}
-      />
-      {errors.password && (
-        <p className="hook__error">Password is required</p>
-      )}
+      <div className="mb-3">
+        <label htmlFor="password" className="form-label">Password</label>
+        <input
+          type="password"
+          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+          id="password"
+          {...register("password", { required: true })}
+          defaultValue={userDetails.password}
+        />
+        {errors.password && (
+          <div className="invalid-feedback">Password is required</div>
+        )}
+      </div>
 
-      {/* Confirm Password */}
-      <label className="hook__text">Confirm Password</label>
-      <input
-        type="password"
-        className="hook__input"
-        {...register("confirmpassword", { required: true })}
-        
-      />
-      {errors.confirmpassword && (
-        <p className="hook__error">Confirm Password is required</p>
-      )}
+      <div className="mb-3">
+        <label htmlFor="confirmpassword" className="form-label">Confirm Password</label>
+        <input
+          type="password"
+          className={`form-control ${errors.confirmpassword ? 'is-invalid' : ''}`}
+          id="confirmpassword"
+          {...register("confirmpassword", { required: true })}
+        />
+        {errors.confirmpassword && (
+          <div className="invalid-feedback">Confirm Password is required</div>
+        )}
+      </div>
 
-      {/* Submit Button */}
-      <button className="hook__button" type="submit">
+      <button className="btn btn-primary" type="submit">
         Update
       </button>
     </form>

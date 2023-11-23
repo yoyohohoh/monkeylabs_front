@@ -1,7 +1,5 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import "./signup.css";
-
 import axios from "axios";
 
 function LoginForm() {
@@ -11,7 +9,7 @@ function LoginForm() {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();  // Create history object
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     if (data.password !== data.confirmpassword) {
@@ -48,51 +46,62 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="hook">
-      {/* Title */}
-      <h1 className="hook__title">Sign Up</h1>
+    <form onSubmit={handleSubmit(onSubmit)} className="container mt-4">
+      <h1 className="mb-4">Sign Up</h1>
 
-      {/* username */}
-      <label className="hook__text">User Name</label>
-      <input
-        type="userName"
-        className="hook__input"
-        {...register("userName", { required: true})}
-      />
-      {errors.userName && (
-        <p className="hook__error">User Name is required and must be valid</p>
-      )}
+      <div className="mb-3">
+        <label htmlFor="userName" className="form-label">User Name</label>
+        <input
+          type="text"
+          className={`form-control ${errors.userName ? 'is-invalid' : ''}`}
+          id="userName"
+          {...register("userName", { required: true })}
+        />
+        {errors.userName && (
+          <div className="invalid-feedback">User Name is required and must be valid</div>
+        )}
+      </div>
 
-      {/* email */}
-      <label className="hook__text">Email</label>
-      <input
-        type="email"
-        className="hook__input"
-        {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-      />
-      {errors.email && (
-        <p className="hook__error">Email is required and must be valid</p>
-      )}
+      <div className="mb-3">
+        <label htmlFor="email" className="form-label">Email</label>
+        <input
+          type="email"
+          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+          id="email"
+          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+        />
+        {errors.email && (
+          <div className="invalid-feedback">Email is required and must be valid</div>
+        )}
+      </div>
 
-      {/* password */}
-      <label className="hook__text">Password</label>
-      <input
-        type="password"
-        className="hook__input"
-        {...register("password", { required: true })}
-      />
-      {errors.password && <p className="hook__error">Password is required</p>}
+      <div className="mb-3">
+        <label htmlFor="password" className="form-label">Password</label>
+        <input
+          type="password"
+          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+          id="password"
+          {...register("password", { required: true })}
+        />
+        {errors.password && (
+          <div className="invalid-feedback">Password is required</div>
+        )}
+      </div>
 
-      {/* confirm password */}
-      <label className="hook__text">Confirm Password</label>
-      <input
-        type="password"
-        className="hook__input"
-        {...register("confirmpassword", { required: true})}
-      />
-      {errors.confirmpassword && <p className="hook__error">Confirm Password is required</p>}
+      <div className="mb-3">
+        <label htmlFor="confirmpassword" className="form-label">Confirm Password</label>
+        <input
+          type="password"
+          className={`form-control ${errors.confirmpassword ? 'is-invalid' : ''}`}
+          id="confirmpassword"
+          {...register("confirmpassword", { required: true })}
+        />
+        {errors.confirmpassword && (
+          <div className="invalid-feedback">Confirm Password is required</div>
+        )}
+      </div>
 
-      <button className="hook__button" type="submit">
+      <button className="btn btn-primary" type="submit">
         Sign Up
       </button>
     </form>

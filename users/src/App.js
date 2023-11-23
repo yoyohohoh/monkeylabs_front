@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import SignUp from './components/SignUp/signup';
@@ -6,15 +5,14 @@ import LogIn from './components/LogIn/login';
 import Profile from './components/Profile/profile';
 
 const Home = () => (
-  <div>
+  <div className="container mt-5">
     <h2>Welcome to our App!</h2>
     <p>Choose an action:</p>
-    <Link to="/signup">
-      <button>Sign Up</button>
+    <Link to="/signup" className="d-block">
+      <button className="btn btn-primary">Sign Up</button>
     </Link>
-    <p></p>
-    <Link to="/login">
-      <button>Login</button>
+    <Link to="/login" className="d-block mt-2">
+      <button className="btn btn-secondary">Login</button>
     </Link>
   </div>
 );
