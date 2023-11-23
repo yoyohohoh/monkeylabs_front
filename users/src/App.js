@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import SignUp from './components/SignUp/signup';
 import LogIn from './components/LogIn/login';
 import Profile from './components/Profile/profile';
+import Events from './components/Events/event';
+import EventDetails from './components/EventDetails/eventdetails';
 
 const Home = () => (
   <div className="container mt-5">
@@ -21,9 +23,12 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Events />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
+        {/* <Route path="/events" element={<Events />} /> */}
+        <Route path="/eventdetails" element={<EventDetails />} />
         <Route path="/profile/:userId" element={<Profile />} />
       </Routes>
     </Router>
