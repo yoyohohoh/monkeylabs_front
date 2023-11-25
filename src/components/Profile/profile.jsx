@@ -35,6 +35,12 @@ function ProfileForm() {
   }, [userDetails, setValue]);
 
   const onSubmit = async (data) => {
+    console.log("Submitted data:");
+    console.log(data.username);
+    console.log(data.email);
+    console.log(data.password);
+    console.log(data.confirmpassword);
+
     if (data.password !== data.confirmpassword) {
       alert("Passwords do not match!");
       return;
@@ -55,6 +61,28 @@ function ProfileForm() {
     } catch (error) {
       console.error("Error updating user:", error);
       alert("Error updating user. Please try again later.");
+    }
+  };
+
+  const handleDelete = () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete? You cannot undo this process.");
+    if (confirmDelete) {
+      axios
+      .delete(`https://comp305groupproject.onrender.com/api/user/${userId}`)
+      .then((response) => {
+        //prompt User deleted
+        alert("User Deleted");
+          
+        console.log("User deleted");
+        localStorage.removeItem('userToken');
+        localStorage.removeItem("userId");
+        console.log('Logged out');
+        // Redirect to login or home page after logout
+        window.location.href = '/';
+      })
+      .catch((error) => {
+        alert("Error deleting user. Please try again later.");
+      });
     }
   };
 
@@ -119,8 +147,14 @@ function ProfileForm() {
         )}
       </div>
 
-      <button className="btn btn-primary" type="submit">
-        Update
+        <button className="btn btn-primary" type="submit">Update</button>
+
+        <button
+          type="button"
+          className="btn btn-outline-danger ms-2"
+          onClick={handleDelete}
+        >
+        Delete
       </button>
     </form>
     </div>

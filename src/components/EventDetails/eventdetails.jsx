@@ -14,7 +14,10 @@ function EventDetailsForm() {
     _id: ""
   });
 
+  const [tickets, setTickets] = useState([]);
+
   useEffect(() => {
+    // Fetch event details
     axios
       .get(`https://comp305groupproject.onrender.com/api/events/${eventId}`)
       .then((response) => {
@@ -22,6 +25,16 @@ function EventDetailsForm() {
       })
       .catch((error) => {
         console.error("Error fetching event details:", error);
+      });
+
+    // Fetch tickets for the event
+    axios
+      .get(`https://comp305groupproject.onrender.com/api/tickets/event/${eventId}`)
+      .then((response) => {
+        setTickets(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tickets:", error);
       });
   }, [eventId]);
 
@@ -42,6 +55,18 @@ function EventDetailsForm() {
               <strong>Event Date:</strong> {eventDetails.event_date}
             </p>
           </div>
+        </div>
+
+        <div className="mt-4">
+          <h6 className="mb-3">Available Tickets</h6>
+          {tickets.map(ticket => (
+            <div key={ticket.id} className="card mb-2 card-hover">
+              <div className="card-body">
+                <p className="card-text"><strong>Seat Number:</strong> {ticket.seat_number}</p>
+                <p className="card-text"><strong>Price:</strong> ${ticket.price}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

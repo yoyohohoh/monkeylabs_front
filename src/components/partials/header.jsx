@@ -6,7 +6,6 @@ function Navbar() {
   const isLoggedIn = localStorage.getItem('userToken') !== null;
 
   const handleLogout = () => {
-    // Your logout logic here
     localStorage.removeItem('userToken');
     localStorage.removeItem("userId");
     console.log('Logged out');
