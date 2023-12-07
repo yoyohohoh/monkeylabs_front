@@ -10,7 +10,7 @@ function EventForm() {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get('https://comp305groupproject.onrender.com/api/events');
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/events`);
                 setEvents(response.data);  // Assuming response.data is an array of events
             } catch (error) {
                 console.error('Error fetching events:', error);
@@ -31,9 +31,12 @@ function EventForm() {
                             <Link to={`/event-details/${event._id}`} className="text-decoration-none">
                                 <div className="card h-100 card-hover">
                                     <div className="card-body">
+                                        <img src={event.event_image} alt={event.event_name} className="card-img-top" />
                                         <h5 className="card-title">{event.event_name}</h5>
                                         <p className="card-text">Date: {event.event_date}</p>
                                         <p className="card-text">Description: {event.event_description}</p>
+                                        <p className='card-text'>Venue Details: {event.venue.venue_name}, {event.venue.location}</p>
+                                        <p className='card-text'>Category: {event.category.category_name}</p>
                                         {/* Add more event details here if needed */}
                                     </div>
                                 </div>

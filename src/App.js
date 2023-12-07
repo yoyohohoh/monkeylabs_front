@@ -5,6 +5,7 @@ import LogIn from './components/LogIn/login';
 import Profile from './components/Profile/profile';
 import Events from './components/Events/event';
 import EventDetails from './components/EventDetails/eventdetails';
+import Orders from './components/Orders/orders';
 
 const Home = () => (
   <div className="container mt-5">
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/" element={<Events />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/orders" element={<Orders />} />
         {/* <Route path="/events" element={<Events />} /> */}
         {/* <Route path="/event-details" element={<EventDetails />} /> */}
         <Route path="/event-details/:eventId" element={<EventDetails />} />

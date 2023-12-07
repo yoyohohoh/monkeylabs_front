@@ -20,7 +20,7 @@ function LoginForm() {
 
     try {
       const response = await axios.post(
-        "https://comp305groupproject.onrender.com/api/users",
+        `${process.env.REACT_APP_BACKEND_URL}/api/users`,
         {
           username: data.userName,
           email: data.email,
@@ -33,12 +33,11 @@ function LoginForm() {
 
 
       //direct to the profile page
-      const responseAdded = await axios.get(`https://comp305groupproject.onrender.com/api/users/username/${data.userName}`);
+      const responseAdded = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/username/${data.userName}`);
 
       // Assuming the response data contains the user ID
       const userId = responseAdded.data._id;
       
-      localStorage.setItem("userToken", response.data.token);
       localStorage.setItem("userId", userId);
 
       // Redirect to the profile page with the user ID as a parameter

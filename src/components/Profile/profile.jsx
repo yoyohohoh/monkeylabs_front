@@ -21,7 +21,7 @@ function ProfileForm() {
   useEffect(() => {
     console.log(userId);
     axios
-    .get(`https://comp305groupproject.onrender.com/api/users/${userId}`)
+    .get(`${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`)
     .then((response) => {
       setUserDetails(response.data);
     })
@@ -48,7 +48,7 @@ function ProfileForm() {
 
     try {
       const response = await axios.put(
-        `https://comp305groupproject.onrender.com/api/users/${userId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`,
         {
           username: data.username,
           email: data.email,
@@ -68,13 +68,12 @@ function ProfileForm() {
     const confirmDelete = window.confirm("Are you sure you want to delete? You cannot undo this process.");
     if (confirmDelete) {
       axios
-      .delete(`https://comp305groupproject.onrender.com/api/user/${userId}`)
+      .delete(`${process.env.REACT_APP_BACKEND_URL}/api/user/${userId}`)
       .then((response) => {
         //prompt User deleted
         alert("User Deleted");
           
         console.log("User deleted");
-        localStorage.removeItem('userToken');
         localStorage.removeItem("userId");
         console.log('Logged out');
         // Redirect to login or home page after logout
