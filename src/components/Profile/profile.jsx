@@ -21,41 +21,33 @@ function ProfileForm() {
   useEffect(() => {
     console.log(userId);
     axios
-    .get(`${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`)
-    .then((response) => {
-      setUserDetails(response.data);
-    })
-    .catch((error) => {
-      console.error("Error fetching user details:", error);
-    });
-  }, [userId]);
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`)
+      .then((response) => {
+        setUserDetails(response.data);
 
-  useEffect(() => {
-    // Setting form values
-  }, [userDetails, setValue]);
+        // Setting form values
+        setValue('username', response.data.username);
+        setValue('email', response.data.email);
+      })
+      .catch((error) => {
+        console.error("Error fetching user details:", error);
+      });
+  }, [userId, setValue]);
 
   const onSubmit = async (data) => {
-    console.log("Submitted data:");
-    console.log(data.username);
-    console.log(data.email);
-    console.log(data.password);
-    console.log(data.confirmpassword);
-
     if (data.password !== data.confirmpassword) {
       alert("Passwords do not match!");
       return;
     }
 
     try {
-      const response = await axios.put(`/api/users/${userId}`,
-        {
-          username: data.username,
-          email: data.email,
-          password: data.password,
-        }
-      );
+      const response = await axios.put(`/api/users/${userId}`, {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      });
 
-      console.log(response.data); // Assuming the server sends back some data
+      console.log(response.data); 
       alert("User successfully updated!");
     } catch (error) {
       console.error("Error updating user:", error);
@@ -67,29 +59,24 @@ function ProfileForm() {
     const confirmDelete = window.confirm("Are you sure you want to delete? You cannot undo this process.");
     if (confirmDelete) {
       axios
-      .delete(`${process.env.REACT_APP_BACKEND_URL}/api/user/${userId}`)
-      .then((response) => {
-        //prompt User deleted
-        alert("User Deleted");
-          
-        console.log("User deleted");
-        localStorage.removeItem("userId");
-        console.log('Logged out');
-        // Redirect to login or home page after logout
-        window.location.href = '/';
-      })
-      .catch((error) => {
-        alert("Error deleting user. Please try again later.");
-      });
+        .delete(`${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`)
+        .then(() => {
+          alert("User Deleted");
+          localStorage.removeItem("userId");
+          window.location.href = '/';
+        })
+        .catch((error) => {
+          alert("Error deleting user. Please try again later.");
+        });
     }
   };
 
   return (
     <div>
       <NavBar />
-    <form onSubmit={handleSubmit(onSubmit)} className="container mt-4">
-      <h1 className="mb-3">Profile</h1>
-
+      <form onSubmit={handleSubmit(onSubmit)} className="container mt-4">
+        <h1 className="mb-3">Profile</h1>
+        
       <div className="mb-3">
         <label htmlFor="username" className="form-label">User Name</label>
         <input
@@ -125,7 +112,6 @@ function ProfileForm() {
           className={`form-control ${errors.password ? 'is-invalid' : ''}`}
           id="password"
           {...register("password", { required: true })}
-          defaultValue={userDetails.password}
         />
         {errors.password && (
           <div className="invalid-feedback">Password is required</div>
@@ -154,9 +140,10 @@ function ProfileForm() {
         >
         Delete
       </button>
-    </form>
+      </form>
     </div>
   );
 }
+
 
 export default ProfileForm;

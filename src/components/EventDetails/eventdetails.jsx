@@ -60,6 +60,12 @@ function EventDetailsForm() {
               src={eventDetails.event_image}
               alt={eventDetails.event_name}
               className="card-img-top"
+              style={{ 
+                  maxHeight: '600px', 
+                  objectFit: 'cover',
+                  width: '100%',
+                  marginBottom: '10px'
+              }}  
             />
             <p className="card-text">
               <strong>Event Name:</strong> {eventDetails.event_name}
@@ -76,7 +82,7 @@ function EventDetailsForm() {
               {eventDetails?.venue?.location}
             </p>
             <p className="card-text">
-              <strong>Category:</strong> {eventDetails?.category?.category_name}
+              <span className="badge bg-primary">{eventDetails?.category.category_name}</span>
             </p>
           </div>
         </div>

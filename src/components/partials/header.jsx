@@ -15,6 +15,15 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
+      <a className="navbar-brand" href="/" style={{ padding: '5px' }}>  {/* Added padding here */}
+    <img
+        src="https://64.media.tumblr.com/097ef955a8b4293f55252738210dc182/64fddc8ce9749341-66/s400x600/bfdbebe4104527c0271b7144b9bdd098a2a32fdb.png"
+        alt="Header Logo"
+        height="40"  // Made the image half smaller
+        className="d-inline-block align-top"
+    />
+</a>
+
         <button
           className="navbar-toggler"
           type="button"
