@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../axiosConfig";
 import "./orders.css";
 import NavBar from "../partials/header";  // Import the NavBar component
 
@@ -10,12 +10,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/api/orders`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get('/api/orders');
         setOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);

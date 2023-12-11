@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import NavBar from "../partials/header";
+import axios from '../../axiosConfig';
 
 function LoginForm() {
   const {
@@ -14,15 +14,15 @@ function LoginForm() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/users/login`, {
+      const response = await axios.post(`/api/users/login`, {
         username: data.userName,
         password: data.password,
-      }, { withCredentials: true });
+      });
 
       // Check if the user was found
       if (response.status === 200) {
         // Assuming the response data contains the user ID
-        const userId = response.data._id;
+        const userId = response.data.user._id;
 
         // save userToken to local storage
         // localStorage.setItem("userToken", response.data.token);

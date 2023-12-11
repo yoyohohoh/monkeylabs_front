@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./paymentmodal.css";
-import axios from "axios";
+import axios from "../../axiosConfig";
 
 const PaymentModal = ({ isOpen, onClose, ticketId }) => {
   const userId = localStorage.getItem("userId");
@@ -90,13 +90,7 @@ const PaymentModal = ({ isOpen, onClose, ticketId }) => {
       };
 
       try {
-        const response = await axios.post(
-          `${process.env.REACT_APP_BACKEND_URL}/api/orders`,
-          paymentData,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.post("/api/orders", paymentData);
         console.log("Payment Response:", response.data);
         setPaymentSuccess(true); // Set payment success state
         // Handle successful payment here

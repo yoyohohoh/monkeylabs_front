@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../axiosConfig";
 import NavBar from "../partials/header";
 
 function LoginForm() {
@@ -19,8 +19,7 @@ function LoginForm() {
     }
 
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/users`,
+      const response = await axios.post(`/api/users`,
         {
           username: data.userName,
           email: data.email,
@@ -33,7 +32,7 @@ function LoginForm() {
 
 
       //direct to the profile page
-      const responseAdded = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/username/${data.userName}`);
+      const responseAdded = await axios.get(`/api/users/username/${data.userName}`);
 
       // Assuming the response data contains the user ID
       const userId = responseAdded.data._id;

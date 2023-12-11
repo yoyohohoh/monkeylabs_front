@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import axios from "../../axiosConfig";
 import { useEffect, useState } from "react";
 import NavBar from "../partials/header";
 
@@ -47,8 +47,7 @@ function ProfileForm() {
     }
 
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`,
+      const response = await axios.put(`/api/users/${userId}`,
         {
           username: data.username,
           email: data.email,
