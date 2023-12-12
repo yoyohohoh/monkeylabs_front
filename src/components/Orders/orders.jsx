@@ -6,11 +6,12 @@ import NavBar from "../partials/header";  // Import the NavBar component
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('/api/orders');
+        const response = await axios.get(`/api/orders/user/${userId}`);
         setOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);

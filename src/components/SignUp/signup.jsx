@@ -27,19 +27,17 @@ function LoginForm() {
         }
       );
 
-      console.log(response.data); // Assuming the server sends back some data
+      console.log(response.data);
       alert("User successfully created!");
 
 
-      //direct to the profile page
       const responseAdded = await axios.get(`/api/users/username/${data.userName}`);
 
-      // Assuming the response data contains the user ID
       const userId = responseAdded.data._id;
       
       localStorage.setItem("userId", userId);
 
-      // Redirect to the profile page with the user ID as a parameter
+      // Redirect to the home page with the user ID as a parameter
       navigate(`/`);
     } catch (error) {
       console.error("Error creating user:", error);

@@ -58,7 +58,7 @@ function EventForm() {
                                         alt={event.event_name} 
                                         style={{ 
                                             objectFit: 'cover', 
-                                            maxHeight: '700px'
+                                            maxHeight: '600px'
                                         }} 
                                     />
                                 </Link>
@@ -105,7 +105,6 @@ function EventForm() {
                                                 <p className='card-text'>
                                                     <span className="badge bg-primary">{event.category.category_name}</span>
                                                 </p>
-                                                {/* Add more event details here if needed */}
                                             </div>
                                         </div>
                                     </Link>

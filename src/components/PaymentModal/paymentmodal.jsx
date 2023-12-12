@@ -82,6 +82,7 @@ const PaymentModal = ({ isOpen, onClose, ticketId }) => {
       setIsLoading(true);
 
       const paymentData = {
+        userId,
         ticketId,
         cardNumber: formData.cardNumber,
         cardHolder: formData.cardHolder,
